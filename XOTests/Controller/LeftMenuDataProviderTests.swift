@@ -40,5 +40,11 @@ class LeftMenuDataProviderTests: XCTestCase {
         XCTAssertEqual(result, IndexPath(row: 1, section: 0))
     }
 
+    // высота ячеек 64px
+    func test_heightForRowAtIndex_equal64() {
+        let height = tableView.delegate?.tableView!(tableView, heightForRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertEqual(height, 64)
+    }
     
 }
