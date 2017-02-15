@@ -39,6 +39,10 @@ class GameViewController: UIViewController {
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.revealViewController().rearViewRevealDisplacement = 0
+            self.revealViewController().rearViewRevealOverdraw = 0
+            self.revealViewController().toggleAnimationType = .easeOut
+            self.revealViewController().rearViewRevealWidth = UIScreen.main.bounds.size.width - 54
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(selectGameFieldCell(sender:)), name: NSNotification.Name("SelectGameFieldCell"), object: nil)
