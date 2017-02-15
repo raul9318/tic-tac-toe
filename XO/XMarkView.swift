@@ -45,7 +45,7 @@ class XMarkView: UIView {
         case Second
     }
     
-    let allAnimationDuration: TimeInterval = 0.3
+    let allAnimationDuration: TimeInterval = 0.4
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,6 +80,7 @@ class XMarkView: UIView {
         layer.addSublayer(secondLineLayer)
         
         animateLine(line: .First)
+        
         _ = Timer.scheduledTimer(withTimeInterval: allAnimationDuration / 2, repeats: false, block: { (timer) in
             self.animateLine(line: .Second)
         })
