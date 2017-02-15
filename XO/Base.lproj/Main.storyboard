@@ -263,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kb-nF-xQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="968.79999999999995" y="732.68365817091455"/>
+            <point key="canvasLocation" x="969" y="1494"/>
         </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="hoT-vr-v0x">
@@ -457,7 +457,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6G-76-XuZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.600000000000001" y="733.5832083958021"/>
+            <point key="canvasLocation" x="30" y="1494"/>
         </scene>
         <!--О программе-->
         <scene sceneID="zld-S6-whb">
@@ -505,7 +505,7 @@ E-mail: raul93.18@gmail.com
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUU-ox-RQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="968.79999999999995" y="1467.616191904048"/>
+            <point key="canvasLocation" x="969" y="2229"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wvi-Xb-oOf">
@@ -523,7 +523,7 @@ E-mail: raul93.18@gmail.com
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSh-mQ-BYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.600000000000001" y="1467.616191904048"/>
+            <point key="canvasLocation" x="30" y="2229"/>
         </scene>
     </scenes>
     <resources>
