@@ -65,11 +65,16 @@ class GameViewController: UIViewController {
         if let winner = gameEngine.winner {
             switch winner {
             case Player.X:
-                winnerLabel.text = "Победил X"
+                winnerLabel.text = "Победили крестики"
             case Player.O:
-                winnerLabel.text = "Победил O"
+                winnerLabel.text = "Победили нолики"
             }
         } else {
+            guard gameEngine.gameover == false else {
+                winnerLabel.text = "Ничья"
+                return
+            }
+            
             switch gameEngine.currentMove {
             case Player.X:
                 winnerLabel.text = "Ход крестиков"
@@ -84,17 +89,8 @@ class GameViewController: UIViewController {
             fatalError()
         }
         
-        guard let winner = userInfo["winner"] as? Player else {
-            winnerLabel.text = "Ничья"
-            return
-        }
-        
-        switch winner {
-        case Player.X:
-            winnerLabel.text = "Победил X"
-        case Player.O:
-            winnerLabel.text = "Победил O"
-        }
+        gameEngine.winner = userInfo["winner"] as? Player
+        setupWinnerLabelText()
     }
     
     func selectGameFieldCell(sender: NSNotification) {

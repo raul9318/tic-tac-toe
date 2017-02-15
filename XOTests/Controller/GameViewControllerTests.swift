@@ -115,7 +115,7 @@ class GameViewControllerTests: XCTestCase {
     // выборк ячейки поля вызывает метод "Move" игрового движка
     func _test_GameFieldCollectionView_selectingCell_calledMoveInGameEngine() {
         
-        var mockGameEngine: MockGameEngine? = MockGameEngine.mockGameEngine(isGameOver: false)
+        let mockGameEngine: MockGameEngine? = MockGameEngine.mockGameEngine(isGameOver: false)
         sut.gameEngine = mockGameEngine
         
         // TODO возможно это перенести в тесты самого поля!
@@ -171,7 +171,7 @@ class GameViewControllerTests: XCTestCase {
     
     // когда игра закончена - не делать ходов
     func _test_whenGameIsOver_doNotSelectGameFieldCell() {
-        var mockGameEngine: MockGameEngine? = MockGameEngine.mockGameEngine(isGameOver: true)
+        let mockGameEngine: MockGameEngine? = MockGameEngine.mockGameEngine(isGameOver: true)
         sut.gameEngine = mockGameEngine
         
         // TODO возможно это перенести в тесты самого поля!
@@ -232,7 +232,7 @@ class GameViewControllerTests: XCTestCase {
     func test_gameOverNotification_changesWinnerLabelText_WhenXPlayerWinner() {
         NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: sut, userInfo: ["winner" : Player.X as Any])
         
-        XCTAssertEqual(sut.winnerLabel.text, "Победил X")
+        XCTAssertEqual(sut.winnerLabel.text, "Победили крестики")
     }
     
     // оповещение о конце игры изменяет winnerLabel
@@ -240,12 +240,16 @@ class GameViewControllerTests: XCTestCase {
     func test_gameOverNotification_changesWinnerLabelText_WhenOPlayerWinner() {
         NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: sut, userInfo: ["winner" : Player.O as Any])
         
-        XCTAssertEqual(sut.winnerLabel.text, "Победил O")
+        XCTAssertEqual(sut.winnerLabel.text, "Победили нолики")
     }
     
     // оповещение о конце игры изменяет winnerLabel
     // когда ничья
     func test_gameOverNotification_changesWinnerLabelText_WhenDraw() {
+        
+        let mockGameEngine = MockGameEngine.mockGameEngine(isGameOver: true)
+        sut.gameEngine = mockGameEngine
+        
         NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: sut, userInfo: ["winner" : (Any).self])
         
         XCTAssertEqual(sut.winnerLabel.text, "Ничья")
