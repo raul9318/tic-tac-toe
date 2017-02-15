@@ -42,14 +42,14 @@ class XMarkViewTests: XCTestCase {
     
     // отступ в пикселях 
     func test_marginFromFrame() {
-        sut.bounds.size = CGSize(width: 200, height: 200)
+        let sut = XMarkView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
         XCTAssertEqual(sut.marginFromFrame, 40)
     }
     
     // TODO точки
     func test_points() {
-        sut.bounds.size = CGSize(width: 200, height: 200)
+        let sut = XMarkView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
         let lt = CGPoint(x: 40, y: 40)
         let lb = CGPoint(x: 40, y: 160)
@@ -57,7 +57,7 @@ class XMarkViewTests: XCTestCase {
         let rb = CGPoint(x: 160, y: 160)
         
         XCTAssertEqual(sut.leftTopPoint, lt)
-        XCTAssertEqual(sut.leftBottomPoin, lb)
+        XCTAssertEqual(sut.leftBottomPoint, lb)
         XCTAssertEqual(sut.rightTopPoint, rt)
         XCTAssertEqual(sut.rightBottomPoint, rb)
     }

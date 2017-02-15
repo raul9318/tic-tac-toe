@@ -45,11 +45,12 @@ class GameViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(gameOver(sender:)), name: NSNotification.Name("GameOver"), object: nil)
         
-        winnerLabel.text = ""
         // TODO: Удалить
         //gameFieldCollectionView.frame.size = fieldSize
         
         gameEngine = GameEngine(loadCurrentGame: true)
+        
+        setupWinnerLabelText()
         
         gameFieldDataProvider.gameEngine = gameEngine
         
@@ -58,7 +59,24 @@ class GameViewController: UIViewController {
         
         // TODO test
         gameFieldCollectionView.reloadData()
-        gameEngine.sendNotificationIfGameIsOver()
+    }
+    
+    func setupWinnerLabelText() {
+        if let winner = gameEngine.winner {
+            switch winner {
+            case Player.X:
+                winnerLabel.text = "Победил X"
+            case Player.O:
+                winnerLabel.text = "Победил O"
+            }
+        } else {
+            switch gameEngine.currentMove {
+            case Player.X:
+                winnerLabel.text = "Ход крестиков"
+            case Player.O:
+                winnerLabel.text = "Ход ноликов"
+            }
+        }
     }
     
     func gameOver(sender: NSNotification) {
@@ -110,6 +128,7 @@ class GameViewController: UIViewController {
         gameEngine.move(to: GameEngineMove(player: gameEngine.currentMove, x: indexPath.item, y: indexPath.section))
         
         alreadySelectedGameCells.append(indexPath)
+        setupWinnerLabelText()
     }
     
     @IBAction func newGame() {
@@ -122,6 +141,7 @@ class GameViewController: UIViewController {
         gameFieldDataProvider.gameEngine = gameEngine
         
         alreadySelectedGameCells.removeAll()
+        setupWinnerLabelText()
         
         gameFieldCollectionView.reloadData()
     }

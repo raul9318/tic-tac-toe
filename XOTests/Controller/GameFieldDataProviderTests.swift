@@ -90,7 +90,6 @@ class GameFieldDataProviderTests: XCTestCase {
     
     // выбор ячейки отрабатывается для всех ячеек
     func test_selectItemForAllItems_selectedItem() {
-        gameField.reloadData()
         
         XCTAssertTrue(gameField.delegate!.collectionView!(gameField, shouldSelectItemAt: IndexPath(item: 0, section: 0)))
         XCTAssertTrue(gameField.delegate!.collectionView!(gameField, shouldSelectItemAt: IndexPath(item: 1, section: 0)))
