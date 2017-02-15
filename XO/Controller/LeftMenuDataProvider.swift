@@ -9,5 +9,11 @@
 import UIKit
 
 class LeftMenuDataProvider: NSObject, UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard indexPath.row != 0 else {
+            return nil
+        }
+        
+        return indexPath
+    }
 }

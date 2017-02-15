@@ -22,6 +22,7 @@
 		6182CA1E1E54564E00BB2596 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182CA1D1E54564E00BB2596 /* LeftMenuTableViewController.swift */; };
 		6182CA201E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182CA1F1E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift */; };
 		6182CA221E54575C00BB2596 /* LeftMenuDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182CA211E54575C00BB2596 /* LeftMenuDataProvider.swift */; };
+		6182CA241E545A5200BB2596 /* LeftMenuDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182CA231E545A5200BB2596 /* LeftMenuDataProviderTests.swift */; };
 		61C83A4E1E4885DE001BF28D /* XMarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C83A4D1E4885DE001BF28D /* XMarkView.xib */; };
 		61C83A501E488689001BF28D /* OMarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C83A4F1E488689001BF28D /* OMarkView.xib */; };
 		61C83A521E488742001BF28D /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C83A511E488742001BF28D /* GameEngineTests.swift */; };
@@ -71,6 +72,7 @@
 		6182CA1D1E54564E00BB2596 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuTableViewController.swift; path = Controller/LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		6182CA1F1E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuTableViewControllerTests.swift; path = Controller/LeftMenuTableViewControllerTests.swift; sourceTree = "<group>"; };
 		6182CA211E54575C00BB2596 /* LeftMenuDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuDataProvider.swift; path = Controller/LeftMenuDataProvider.swift; sourceTree = "<group>"; };
+		6182CA231E545A5200BB2596 /* LeftMenuDataProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuDataProviderTests.swift; path = Controller/LeftMenuDataProviderTests.swift; sourceTree = "<group>"; };
 		61C83A4D1E4885DE001BF28D /* XMarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMarkView.xib; sourceTree = "<group>"; };
 		61C83A4F1E488689001BF28D /* OMarkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMarkView.xib; sourceTree = "<group>"; };
 		61C83A511E488742001BF28D /* GameEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				61DD24521E544A7500CF9274 /* View */,
 				61DD24511E544A6A00CF9274 /* Model */,
 				6182CA1F1E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift */,
+				6182CA231E545A5200BB2596 /* LeftMenuDataProviderTests.swift */,
 			);
 			path = XOTests;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				61F768251E41CFE1000B4FE4 /* GameViewControllerTests.swift in Sources */,
 				61F3D7911E44B50300843136 /* OMarkViewTests.swift in Sources */,
 				61F8522D1E421C9600CE818A /* GameFieldDataProviderTests.swift in Sources */,
+				6182CA241E545A5200BB2596 /* LeftMenuDataProviderTests.swift in Sources */,
 				6182CA201E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift in Sources */,
 				61C83A561E488D67001BF28D /* GameEngineMoveTests.swift in Sources */,
 				612DD9681E40BE9200D42C34 /* MenuDataProviderTests.swift in Sources */,
