@@ -33,80 +33,36 @@ class XMarkView: UIView {
        return CGPoint(x: self.bounds.width - self.marginFromFrame, y: self.marginFromFrame)
     }()
     
-    lazy var leftBottomPoint: CGPoint = {
+    lazy var leftBottomPoin: CGPoint = {
         return CGPoint(x: self.marginFromFrame, y: self.bounds.height - self.marginFromFrame)
     }()
     
-    var firstLineLayer: CAShapeLayer!
-    var secondLineLayer: CAShapeLayer!
-    
-    enum Line: Int {
-        case First
-        case Second
-    }
-    
-    let allAnimationDuration: TimeInterval = 0.3
+    var linePath: UIBezierPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        
-        let firstLinePath = UIBezierPath()
-        firstLinePath.move(to: leftTopPoint)
-        firstLinePath.addLine(to: rightBottomPoint)
-        
-        firstLineLayer = CAShapeLayer()
-        firstLineLayer.path = firstLinePath.cgPath
-        firstLineLayer.fillColor = UIColor.clear.cgColor
-        firstLineLayer.strokeColor = UIColor.black.cgColor
-        firstLineLayer.lineWidth = lineWidth
-        
-        firstLineLayer.strokeEnd = 0.0
-        
-        layer.addSublayer(firstLineLayer)
-        
-        let secondLinePath = UIBezierPath()
-        secondLinePath.move(to: rightTopPoint)
-        secondLinePath.addLine(to: leftBottomPoint)
-        
-        secondLineLayer = CAShapeLayer()
-        secondLineLayer.path = secondLinePath.cgPath
-        secondLineLayer.fillColor = UIColor.clear.cgColor
-        secondLineLayer.strokeColor = UIColor.black.cgColor
-        secondLineLayer.lineWidth = lineWidth
-        
-        secondLineLayer.strokeEnd = 0.0
-        
-        layer.addSublayer(secondLineLayer)
-        
-        animateLine(line: .First)
-        _ = Timer.scheduledTimer(withTimeInterval: allAnimationDuration / 2, repeats: false, block: { (timer) in
-            self.animateLine(line: .Second)
-        })
-    }
-    
-    func animateLine(line: Line) {
-        
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        
-        animation.duration = allAnimationDuration / 2
-        
-        animation.fromValue = 0
-        animation.toValue = 1
-        
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        
-        switch line {
-        case .First:
-            firstLineLayer.strokeEnd = 1.0
-            firstLineLayer.add(animation, forKey: "animateLine")
-        case .Second:
-            secondLineLayer.strokeEnd = 1.0
-            secondLineLayer.add(animation, forKey: "animateLine")
-        }
+        self.backgroundColor = UIColor(red: 100, green: 0, blue: 0, alpha: 0)
+        linePath = UIBezierPath()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    override func draw(_ rect: CGRect) {
+        drawLine(start: leftTopPoint, end: rightBottomPoint)
+        drawLine(start: leftBottomPoin, end: rightTopPoint)
+    }
+    
+    func drawLine(start: CGPoint, end: CGPoint) {
+        if let linePath = linePath {
+            linePath.move(to: start)
+            linePath.addLine(to: end)
+            linePath.lineWidth = lineWidth
+            
+            linePath.stroke()
+        }
     }
 }
