@@ -221,7 +221,7 @@
         <!--Правила-->
         <scene sceneID="Dal-TM-k4J">
             <objects>
-                <viewController id="Amv-Fh-8hO" sceneMemberID="viewController">
+                <viewController id="Amv-Fh-8hO" customClass="RulesViewController" customModule="XO" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QCs-oC-0xJ"/>
                         <viewControllerLayoutGuide type="bottom" id="zbE-Q7-w53"/>
@@ -251,6 +251,9 @@
                     <navigationItem key="navigationItem" title="Правила" id="RTb-iB-IXF">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="VUl-om-Cma"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="VUl-om-Cma" id="Own-fr-h8q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kb-nF-xQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
