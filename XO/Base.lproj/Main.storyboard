@@ -200,6 +200,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <connections>
+                                            <segue destination="7Co-tN-k2R" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Rds-bH-Jn0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -230,14 +233,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zfo-wJ-nHe">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zfo-wJ-nHe">
                                 <rect key="frame" x="16" y="0.0" width="343" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Кре́стики-но́лики — логическая игра между двумя противниками на квадратном поле 3 на 3 клетки. Один из игроков играет «крестиками», второй — «ноликами».
+                                <mutableString key="text">Кре́стики-но́лики — логическая игра между двумя противниками на квадратном поле 3 на 3 клетки. Один из игроков играет «крестиками», второй — «ноликами».
 
-Игроки по очереди ставят на свободные клетки поля знаки (один всегда крестики, другой всегда нолики). Первый, выстроивший в ряд 3 своих фигуры по вертикали, горизонтали или диагонали, выигрывает. Первый ход делает игрок, ставящий крестики.</string>
+Игроки по очереди ставят на свободные клетки поля знаки (один всегда крестики, другой всегда нолики). Первый, выстроивший в ряд 3 своих фигуры по вертикали, горизонтали или диагонали, выигрывает. Первый ход делает игрок, ставящий крестики.
+
+Подробнее на https://ru.wikipedia.org/wiki/Крестики-нолики</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -452,6 +458,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6G-76-XuZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="29.600000000000001" y="733.5832083958021"/>
+        </scene>
+        <!--О программе-->
+        <scene sceneID="zld-S6-whb">
+            <objects>
+                <viewController id="zmv-6m-iz8" customClass="AboutViewController" customModule="XO" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u2j-vU-FzG"/>
+                        <viewControllerLayoutGuide type="bottom" id="KYu-Ic-41z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="25Z-Il-RmI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TpI-IU-4J2">
+                                <rect key="frame" x="16" y="0.0" width="343" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Данная программа разработана в демонстрационных целях.
+Основной упор сделан на метод разработки через тестирования (TDD).
+
+Разработчик: Ибрагимов Рамиль Джебраил оглы, МО. г. Волоколамск
+
+Контакты 
+Telegram Messenger: https://t.me/Ibragimov_Ramil
+E-mail: raul93.18@gmail.com
+Профиль на "Мой круг": https://moikrug.ru/raul93</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="TpI-IU-4J2" secondAttribute="trailing" id="7ZD-Wr-XGR"/>
+                            <constraint firstItem="KYu-Ic-41z" firstAttribute="top" secondItem="TpI-IU-4J2" secondAttribute="bottom" id="GR0-k2-dvj"/>
+                            <constraint firstItem="TpI-IU-4J2" firstAttribute="leading" secondItem="25Z-Il-RmI" secondAttribute="leadingMargin" id="Inf-Ci-tQH"/>
+                            <constraint firstItem="TpI-IU-4J2" firstAttribute="top" secondItem="25Z-Il-RmI" secondAttribute="topMargin" id="lHz-If-kQO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="О программе" id="zHC-UA-kur">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="JAD-w0-b8M"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="JAD-w0-b8M" id="JXX-GO-HRD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cUU-ox-RQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="968.79999999999995" y="1467.616191904048"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Wvi-Xb-oOf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Co-tN-k2R" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8vG-lT-uAb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zmv-6m-iz8" kind="relationship" relationship="rootViewController" id="2PK-Bi-yQl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZSh-mQ-BYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.600000000000001" y="1467.616191904048"/>
         </scene>
     </scenes>
     <resources>
