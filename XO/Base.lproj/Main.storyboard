@@ -33,10 +33,10 @@
             </objects>
             <point key="canvasLocation" x="-926" y="-28"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Left Menu Table View Controller-->
         <scene sceneID="xWg-7D-1MA">
             <objects>
-                <tableViewController id="eLK-NR-wzf" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LeftMenuTableViewController" id="eLK-NR-wzf" customClass="LeftMenuTableViewController" customModule="XO" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="v3j-kF-aQF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,8 +209,12 @@
                             <outlet property="delegate" destination="eLK-NR-wzf" id="vUO-al-aM9"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="dataProvider" destination="Sgg-YG-PJq" id="Yps-8q-e3s"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vL2-yH-9qh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Sgg-YG-PJq" customClass="LeftMenuDataProvider" customModule="XO" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-927" y="734"/>
         </scene>
@@ -229,9 +233,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zfo-wJ-nHe">
                                 <rect key="frame" x="16" y="0.0" width="343" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Кре́стики-но́лики — логическая игра между двумя противниками на квадратном поле 3 на 3 клетки. Один из игроков играет «крестиками», второй — «ноликами».
+                                <string key="text">Кре́стики-но́лики — логическая игра между двумя противниками на квадратном поле 3 на 3 клетки. Один из игроков играет «крестиками», второй — «ноликами».
 
-Игроки по очереди ставят на свободные клетки поля знаки (один всегда крестики, другой всегда нолики). Первый, выстроивший в ряд 3 своих фигуры по вертикали, горизонтали или диагонали, выигрывает. Первый ход делает игрок, ставящий крестики.</mutableString>
+Игроки по очереди ставят на свободные клетки поля знаки (один всегда крестики, другой всегда нолики). Первый, выстроивший в ряд 3 своих фигуры по вертикали, горизонтали или диагонали, выигрывает. Первый ход делает игрок, ставящий крестики.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
