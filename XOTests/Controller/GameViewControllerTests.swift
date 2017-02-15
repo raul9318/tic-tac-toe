@@ -186,11 +186,6 @@ class GameViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.winnerLabel)
     }
     
-    // после инициализации текс лейбла победитель пустой
-    func test_winnerLabelTextIsEmpty_afterLoading() {
-        XCTAssertEqual(sut.winnerLabel.text, "")
-    }
-    
     // кнопка новой игры
     func test_hasNewGameButton() {
         XCTAssertNotNil(sut.newGameButton)
@@ -208,7 +203,6 @@ class GameViewControllerTests: XCTestCase {
     }
     
     // новая игра делает сброс игрового движка
-    // и обнуляет текст лейбла победителя
     func test_newGame_resetGameEngineAndTextOfWinnerLabel() {
         let sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         
@@ -227,8 +221,7 @@ class GameViewControllerTests: XCTestCase {
         let firstGameEngine = sut.gameEngine
         
         sut.newGame()
-        
-        XCTAssertEqual(sut.winnerLabel.text, "")
+
         XCTAssertFalse(firstGameEngine === sut.gameEngine)
     }
 
@@ -237,7 +230,7 @@ class GameViewControllerTests: XCTestCase {
     // оповещение о конце игры изменяет winnerLabel
     // когда побеждает X
     func test_gameOverNotification_changesWinnerLabelText_WhenXPlayerWinner() {
-        NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: nil, userInfo: ["winner" : Player.X as Any])
+        NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: sut, userInfo: ["winner" : Player.X as Any])
         
         XCTAssertEqual(sut.winnerLabel.text, "Победил X")
     }
@@ -245,7 +238,7 @@ class GameViewControllerTests: XCTestCase {
     // оповещение о конце игры изменяет winnerLabel
     // когда побеждает O
     func test_gameOverNotification_changesWinnerLabelText_WhenOPlayerWinner() {
-        NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: nil, userInfo: ["winner" : Player.O as Any])
+        NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: sut, userInfo: ["winner" : Player.O as Any])
         
         XCTAssertEqual(sut.winnerLabel.text, "Победил O")
     }
@@ -253,7 +246,7 @@ class GameViewControllerTests: XCTestCase {
     // оповещение о конце игры изменяет winnerLabel
     // когда ничья
     func test_gameOverNotification_changesWinnerLabelText_WhenDraw() {
-        NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: nil, userInfo: ["winner" : (Any).self])
+        NotificationCenter.default.post(name: NSNotification.Name("GameOver"), object: sut, userInfo: ["winner" : (Any).self])
         
         XCTAssertEqual(sut.winnerLabel.text, "Ничья")
     }
@@ -289,7 +282,45 @@ class GameViewControllerTests: XCTestCase {
         XCTAssertEqual(gameEngine!.moves.last, move)
     }
     
+    // лейбл победителя показывает текущий ход после загрузки
+    func test_winnerLabel_showsCurrentMove_afterLoad() {
+        XCTAssertEqual(sut.winnerLabel.text, "Ход крестиков")
+    }
     
+    // лейб победителя меняет текст хода после выбора ячейки поля
+    func test_changesWinnerLabel_afterSelectingGameFieldCell(){
+        
+        let gameEngine = GameEngine()
+        
+        sut.gameEngine = gameEngine
+        
+        XCTAssertEqual(sut.winnerLabel.text, "Ход крестиков")
+        
+        sut.gameFieldCollectionView.delegate?.collectionView!(sut.gameFieldCollectionView, didSelectItemAt: IndexPath(item: 0, section: 0))
+        
+        XCTAssertEqual(sut.winnerLabel.text, "Ход ноликов")
+        
+        sut.gameFieldCollectionView.delegate?.collectionView!(sut.gameFieldCollectionView, didSelectItemAt: IndexPath(item: 0, section: 1))
+        
+        XCTAssertEqual(sut.winnerLabel.text, "Ход крестиков")
+    }
+    
+    // TODO лейб победителя обновляется когда нажимаем кнопку Новая игра
+    func test_changesWinnerLabel_whenTapOnNewGame() {
+        let gameEngine = GameEngine()
+        
+        sut.gameEngine = gameEngine
+        
+        XCTAssertEqual(sut.winnerLabel.text, "Ход крестиков")
+        
+        sut.gameFieldCollectionView.delegate?.collectionView!(sut.gameFieldCollectionView, didSelectItemAt: IndexPath(item: 0, section: 0))
+        
+        XCTAssertEqual(sut.winnerLabel.text, "Ход ноликов")
+        
+        sut.newGame()
+        
+        XCTAssertEqual(sut.winnerLabel.text, "Ход крестиков")
+    }
 
 }
 
