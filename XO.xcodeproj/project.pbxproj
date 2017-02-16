@@ -14,6 +14,8 @@
 		612DD96A1E40C07B00D42C34 /* MenuTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612DD9691E40C07B00D42C34 /* MenuTitleCell.swift */; };
 		612DD96C1E40C1A400D42C34 /* MenuRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612DD96B1E40C1A400D42C34 /* MenuRowCell.swift */; };
 		616A4C1E1E4B274500B78C60 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 616A4C1D1E4B274500B78C60 /* SWRevealViewController.m */; };
+		616ECD191E55D0D100B19157 /* WinnerLineViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616ECD181E55D0D100B19157 /* WinnerLineViewTests.swift */; };
+		616ECD1B1E55D21900B19157 /* WinnerLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616ECD1A1E55D21900B19157 /* WinnerLineView.swift */; };
 		617941421E4DE95D0003E7DD /* GameFieldCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617941411E4DE95D0003E7DD /* GameFieldCellTests.swift */; };
 		6182CA1E1E54564E00BB2596 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182CA1D1E54564E00BB2596 /* LeftMenuTableViewController.swift */; };
 		6182CA201E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182CA1F1E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift */; };
@@ -60,6 +62,8 @@
 		616A4C1B1E4B274500B78C60 /* XO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XO-Bridging-Header.h"; sourceTree = "<group>"; };
 		616A4C1C1E4B274500B78C60 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		616A4C1D1E4B274500B78C60 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		616ECD181E55D0D100B19157 /* WinnerLineViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerLineViewTests.swift; sourceTree = "<group>"; };
+		616ECD1A1E55D21900B19157 /* WinnerLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerLineView.swift; sourceTree = "<group>"; };
 		617941411E4DE95D0003E7DD /* GameFieldCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameFieldCellTests.swift; path = Controller/GameFieldCellTests.swift; sourceTree = "<group>"; };
 		6182CA1D1E54564E00BB2596 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuTableViewController.swift; path = Controller/LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		6182CA1F1E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuTableViewControllerTests.swift; path = Controller/LeftMenuTableViewControllerTests.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				61DD24501E544A6100CF9274 /* View */,
 				61DD244F1E544A5100CF9274 /* Model */,
 				612DD9401E40B77E00D42C34 /* Main.storyboard */,
+				616ECD1A1E55D21900B19157 /* WinnerLineView.swift */,
 			);
 			path = XO;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				612DD9621E40B93500D42C34 /* Controller */,
 				61DD24521E544A7500CF9274 /* View */,
 				61DD24511E544A6A00CF9274 /* Model */,
+				616ECD181E55D0D100B19157 /* WinnerLineViewTests.swift */,
 			);
 			path = XOTests;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 				61F3D7931E44B53000843136 /* OMarkView.swift in Sources */,
 				612DD96A1E40C07B00D42C34 /* MenuTitleCell.swift in Sources */,
 				612DD93D1E40B77E00D42C34 /* AppDelegate.swift in Sources */,
+				616ECD1B1E55D21900B19157 /* WinnerLineView.swift in Sources */,
 				61F3D7891E44624800843136 /* GameFieldCell.swift in Sources */,
 				61C83A541E48877C001BF28D /* GameEngine.swift in Sources */,
 				6182CA281E54692800BB2596 /* AboutViewController.swift in Sources */,
@@ -363,6 +370,7 @@
 				61F3D7911E44B50300843136 /* OMarkViewTests.swift in Sources */,
 				61F8522D1E421C9600CE818A /* GameFieldDataProviderTests.swift in Sources */,
 				6182CA241E545A5200BB2596 /* LeftMenuDataProviderTests.swift in Sources */,
+				616ECD191E55D0D100B19157 /* WinnerLineViewTests.swift in Sources */,
 				6182CA201E5456F300BB2596 /* LeftMenuTableViewControllerTests.swift in Sources */,
 				61C83A561E488D67001BF28D /* GameEngineMoveTests.swift in Sources */,
 			);
