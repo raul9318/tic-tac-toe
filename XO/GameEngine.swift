@@ -13,6 +13,38 @@ enum Player: Int {
     case O
 }
 
+enum WinnerLine {
+    case Horizon(Int)
+    case Vertical(Int)
+    case Diagonal(Int)
+}
+
+extension WinnerLine: Equatable {
+    static func ==(lhs: WinnerLine, rhs: WinnerLine) -> Bool {
+        
+        switch (lhs, rhs) {
+        case (WinnerLine.Horizon(0), WinnerLine.Horizon(0)):
+            return true
+        case (WinnerLine.Horizon(1), WinnerLine.Horizon(1)):
+            return true
+        case (WinnerLine.Horizon(2), WinnerLine.Horizon(2)):
+            return true
+        case (WinnerLine.Vertical(0), WinnerLine.Vertical(0)):
+            return true
+        case (WinnerLine.Vertical(1), WinnerLine.Vertical(1)):
+            return true
+        case (WinnerLine.Vertical(2), WinnerLine.Vertical(2)):
+            return true
+        case (WinnerLine.Diagonal(0), WinnerLine.Diagonal(0)):
+            return true
+        case (WinnerLine.Diagonal(1), WinnerLine.Diagonal(1)):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 class GameEngine: NSObject {
     var currentMove: Player = Player.X
     var countOfMoves: Int {
@@ -36,6 +68,7 @@ class GameEngine: NSObject {
         }
     }
     var winner: Player?
+    var winnerLine: WinnerLine?
     
     var moves = [GameEngineMove]()
     var lastMove: GameEngineMove? {
@@ -242,6 +275,7 @@ class GameEngine: NSObject {
                         break
                     } else if x == 2 {
                         winner = move.player
+                        winnerLine = WinnerLine.Horizon(y)
                     }
                 }
                 
@@ -285,6 +319,7 @@ class GameEngine: NSObject {
                         break
                     } else if y == 2 {
                         winner = move.player
+                        winnerLine = WinnerLine.Horizon(x)
                     }
                 }
                 
@@ -297,7 +332,7 @@ class GameEngine: NSObject {
             
         }
         
-        // first diagonal
+        // first diagonal main 0 -> 2
         guard winner == nil else {
             self.winner = winner
             return
@@ -327,6 +362,7 @@ class GameEngine: NSObject {
                     break
                 } else if y == 2 {
                     winner = move.player
+                    winnerLine = WinnerLine.Diagonal(0)
                 }
             }
             
@@ -339,7 +375,7 @@ class GameEngine: NSObject {
         }
         
         
-        // second diagonal
+        // second diagonal 2 -> 0
         guard winner == nil else {
             self.winner = winner
             return
@@ -369,6 +405,7 @@ class GameEngine: NSObject {
                     break
                 } else if x == 2 {
                     winner = move.player
+                    winnerLine = WinnerLine.Diagonal(1)
                 }
             }
             
