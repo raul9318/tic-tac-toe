@@ -326,6 +326,118 @@ class GameEngineTests: XCTestCase {
         testingMoveAtCoordinate((x: 0, y: 0), player: nil)
     }
     
+    // ожидается выигрышная комбинация по первой горизонтальной линии
+    func test_checkWinner_setsFirstHorizontalWinnerLine() {
+        let line = 0
+        makeWinner(player: .X, onLine: line)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // ожидается выигрышная комбинация по второй горизонтальной линии
+    func test_checkWinner_setsSecondHorizontalWinnerLine() {
+        let line = 1
+        makeWinner(player: .X, onLine: line)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // ожидается выигрышная комбинация по третей горизонтальной линии
+    func test_checkWinner_setsThirdHorizontalWinnerLine() {
+        let line = 2
+        makeWinner(player: .X, onLine: line)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // ожидается выигрышная комбинация по первой вертикальной линии
+    func test_checkWinner_setsFirstVerticalWinnerLine() {
+        let line = 0
+        makeWinnerOnY(player: .X, onLine: line)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // ожидается выигрышная комбинация по второй вертикальной линии
+    func test_checkWinner_setsSecondVerticalWinnerLine() {
+        let line = 1
+        makeWinnerOnY(player: .X, onLine: line)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // ожидается выигрышная комбинация по третей вертикальной линии
+    func test_checkWinner_setsThirdVerticalWinnerLine() {
+        let line = 2
+        makeWinnerOnY(player: .X, onLine: line)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // ожидается выигрышная комбинация по главной диагонали
+    func test_checkWinner_setsMainDiagonalWinnerLine() {
+        let line = 0
+        makeWinnerOnXY(player: .X)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Diagonal(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // ожидается выигрышная комбинация по обратной диагонали
+    func test_checkWinner_setsSecondDiagonalWinnerLine() {
+        let line = 1
+        makeWinnerOnYX(player: .X)
+        
+        sut.checkWinner()
+        
+        let winnerLine: WinnerLine? = WinnerLine.Diagonal(line)
+        
+        XCTAssertNotNil(sut.winnerLine)
+        XCTAssertEqual(sut.winnerLine, winnerLine)
+    }
+    
+    // нет выигрышной линии
+    func test_checkWinner_winnerLineIsNil() {
+        sut.checkWinner()
+        
+        XCTAssertNil(sut.winnerLine)
+    }
+    
+    
 }
 
 extension GameEngineTests {
