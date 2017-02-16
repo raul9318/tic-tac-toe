@@ -319,7 +319,7 @@ class GameEngine: NSObject {
                         break
                     } else if y == 2 {
                         winner = move.player
-                        winnerLine = WinnerLine.Horizon(x)
+                        winnerLine = WinnerLine.Vertical(x)
                     }
                 }
                 

@@ -372,7 +372,7 @@ class GameEngineTests: XCTestCase {
         
         sut.checkWinner()
         
-        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        let winnerLine: WinnerLine? = WinnerLine.Vertical(line)
         
         XCTAssertNotNil(sut.winnerLine)
         XCTAssertEqual(sut.winnerLine, winnerLine)
@@ -385,7 +385,7 @@ class GameEngineTests: XCTestCase {
         
         sut.checkWinner()
         
-        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        let winnerLine: WinnerLine? = WinnerLine.Vertical(line)
         
         XCTAssertNotNil(sut.winnerLine)
         XCTAssertEqual(sut.winnerLine, winnerLine)
@@ -398,7 +398,7 @@ class GameEngineTests: XCTestCase {
         
         sut.checkWinner()
         
-        let winnerLine: WinnerLine? = WinnerLine.Horizon(line)
+        let winnerLine: WinnerLine? = WinnerLine.Vertical(line)
         
         XCTAssertNotNil(sut.winnerLine)
         XCTAssertEqual(sut.winnerLine, winnerLine)
