@@ -37,7 +37,8 @@ class OMarkView: UIView {
         self.backgroundColor = UIColor.clear
         
         // легкий способ создать CGPath
-        let circlePath = UIBezierPath(arcCenter: centerOfCircle, radius: radiusOfCircle, startAngle: CGFloat(3*M_PI_2), endAngle: CGFloat(3*M_PI_2 - 2*M_PI), clockwise: false)
+        let startAngle = 7*M_PI/6
+        let circlePath = UIBezierPath(arcCenter: centerOfCircle, radius: radiusOfCircle, startAngle: CGFloat(startAngle), endAngle: CGFloat(startAngle - 2*M_PI), clockwise: false)
         
         // настраиваем circleLayer
         circleLayer = CAShapeLayer()
