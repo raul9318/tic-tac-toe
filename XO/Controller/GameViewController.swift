@@ -28,6 +28,7 @@ class GameViewController: UIViewController {
     }
     
     var gameEngine: GameEngine!
+    var winnerLineView: WinnerLineView!
     
     var alreadySelectedGameCells = [IndexPath]()
     
@@ -61,6 +62,7 @@ class GameViewController: UIViewController {
         gameFieldCollectionView.dataSource = gameFieldDataProvider
         gameFieldCollectionView.delegate = gameFieldDataProvider
         
+        removeWinnerLineView()
         // TODO test
         gameFieldCollectionView.reloadData()
     }
@@ -95,6 +97,18 @@ class GameViewController: UIViewController {
         
         gameEngine.winner = userInfo["winner"] as? Player
         setupWinnerLabelText()
+        drawWinnerLine()
+    }
+    
+    func drawWinnerLine() {
+        guard let winnerLine = gameEngine.winnerLine else {
+            return
+        }
+        
+        let frame = gameFieldCollectionView.frame
+        winnerLineView = WinnerLineView(frame: frame, winnerLine: winnerLine)
+        
+        view.addSubview(winnerLineView)
     }
     
     func selectGameFieldCell(sender: NSNotification) {
@@ -143,6 +157,16 @@ class GameViewController: UIViewController {
         alreadySelectedGameCells.removeAll()
         setupWinnerLabelText()
         
+        removeWinnerLineView()
+        
         gameFieldCollectionView.reloadData()
+    }
+    
+    func removeWinnerLineView() {
+        for view in view.subviews {
+            if view.tag == 111 {
+                view.removeFromSuperview()
+            }
+        }
     }
 }

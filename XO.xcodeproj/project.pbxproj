@@ -131,7 +131,6 @@
 				61DD24501E544A6100CF9274 /* View */,
 				61DD244F1E544A5100CF9274 /* Model */,
 				612DD9401E40B77E00D42C34 /* Main.storyboard */,
-				616ECD1A1E55D21900B19157 /* WinnerLineView.swift */,
 			);
 			path = XO;
 			sourceTree = "<group>";
@@ -143,7 +142,6 @@
 				612DD9621E40B93500D42C34 /* Controller */,
 				61DD24521E544A7500CF9274 /* View */,
 				61DD24511E544A6A00CF9274 /* Model */,
-				616ECD181E55D0D100B19157 /* WinnerLineViewTests.swift */,
 			);
 			path = XOTests;
 			sourceTree = "<group>";
@@ -211,6 +209,7 @@
 			children = (
 				61F3D78C1E447BD100843136 /* XMarkView.swift */,
 				61F3D7921E44B53000843136 /* OMarkView.swift */,
+				616ECD1A1E55D21900B19157 /* WinnerLineView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -229,6 +228,7 @@
 			children = (
 				61F3D78E1E447C5600843136 /* XMarkViewTests.swift */,
 				61F3D7901E44B50300843136 /* OMarkViewTests.swift */,
+				616ECD181E55D0D100B19157 /* WinnerLineViewTests.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";

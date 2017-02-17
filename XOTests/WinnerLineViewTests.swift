@@ -54,16 +54,6 @@ class WinnerLineViewTests: XCTestCase {
         XCTAssertEqual(sut.backgroundColor, UIColor.clear)
     }
     
-    // имеется слой для рисования линии (CAShapeLayer)
-    func test_hasLineLayer_CAShapeLayer() {
-        XCTAssertNotNil(sut.lineLayer)
-    }
-    
-    // после инициализации слой рисования имеет path
-    func test_afterInit_lineLayerPath_notNil() {
-        XCTAssertNotNil(sut.lineLayer.path)
-    }
-    
     // имеется выигрышная линия
     func test_hasWinnerLine() {
         XCTAssertNotNil(sut.winnerLine)
@@ -159,6 +149,129 @@ class WinnerLineViewTests: XCTestCase {
         testing_returnStartAndEndPointOfLine_whenWinnerLineIs(frameWidth: 300, winnerLine: winnerLine, startPoint: startPoint, endPoint: endPoint)
     }
     
+    // настройка слоя
+    // устанавливается начальная и конечная точка
+    func test_setupLineLayer() {
+        let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        
+        let sut = WinnerLineView(frame: frame, winnerLine: .Horizon(0))
+        let mockLinePath = MockLinePath()
+        sut.linePath = mockLinePath
+        
+        sut.setupLineLayer()
+        
+        XCTAssertNotNil(mockLinePath.gotStartPoint)
+        XCTAssertNotNil(mockLinePath.gotEndPoint)
+        
+        let startPoint = CGPoint(x: 10, y: 50)
+        let endPoint = CGPoint(x: 290, y: 50)
+        
+        XCTAssertEqual(mockLinePath.gotStartPoint, startPoint)
+        XCTAssertEqual(mockLinePath.gotEndPoint, endPoint)
+    }
+    
+    // настройка слоя путь линии является путем слоя рисования
+    func test_setupLineLayer_lineLayerPathEqual_linePath() {
+        let mockLineLayer = MockLineLayer()
+        sut.lineLayer = mockLineLayer
+        
+        sut.setupLineLayer()
+        
+        XCTAssertTrue(mockLineLayer.gotCGPath === sut.linePath.cgPath)
+    }
+    
+    // настройка слоя устанавливает толщину линии равную параметру lineWidth
+    func test_setupLineLayer_setupLineWidth_equalLineWidthParam() {
+        sut.setupLineLayer()
+        
+        XCTAssertEqual(sut.lineLayer.lineWidth, sut.lineWidth)
+    }
+    
+    // настройка слоя устанавливает цвет линии равную параметру lineColor
+    func test_setupLineLayer_setupStrokeColor_equalLineColorParam() {
+        sut.setupLineLayer()
+        
+        XCTAssertEqual(sut.lineLayer.strokeColor, sut.lineColor.cgColor)
+    }
+    
+    // настройка слоя устанавливает прозрачный цвет подложки
+    func test_setupLineLayer_setClearBackground() {
+        sut.setupLineLayer()
+        
+        XCTAssertEqual(sut.lineLayer.fillColor, UIColor.clear.cgColor)
+    }
+    
+    // настройка слоя устанавливает strokeEnd в 0.0
+    // чтобы не отрисовывалась линия
+    func test_setupLineLayer_setStrokeEnd_equal_0_0() {
+        sut.setupLineLayer()
+        
+        XCTAssertEqual(sut.lineLayer.strokeEnd
+            , 0.0)
+    }
+    
+    // после инициализации вызывается настройка слоя рисования линии
+    func test_init_calledSetupLineLayer() {
+        let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        let sut = MockWinnerLineView(frame: frame, winnerLine: .Horizon(0))
+        
+        XCTAssertTrue(sut.gotCalledSetupLineLayer)
+    }
+
+    // добавляем слой к слоям отображению после настройки
+    func test_addLineLayer_toViewsLayers_afterSetupLineLayer() {
+        
+        let sublayers = sut.layer.sublayers
+        
+        guard let result = sublayers?.contains(where: { (layer) -> Bool in
+            let lineLayer = self.sut.lineLayer
+            return layer === lineLayer
+        }) else {
+            XCTFail(); return
+        }
+        
+        XCTAssertTrue(result)
+    }
+    
+    // запуск анимации настраиваются параметры анимации
+    func test_animateLine_setupAnimationParams() {
+        sut.animateLine()
+        
+        let animation = sut.lineLayerAnimation
+        
+        XCTAssertEqual(animation?.keyPath, "strokeEnd")
+        XCTAssertEqual(animation?.fromValue as? Int, 0)
+        XCTAssertEqual(animation?.toValue as? Int, 1)
+        XCTAssertEqual(animation?.duration, sut.animationDuration)
+        XCTAssertEqual(animation?.timingFunction, CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
+    }
+    
+    // запуск анимации изменяет параметр strokeEnd у слоя линии
+    func test_animateLine_changesLineLayerStrokeEnd_to_1_0() {
+        sut.animateLine()
+        
+        XCTAssertEqual(sut.lineLayer.strokeEnd, 1.0)
+    }
+    
+    // запуск анимации добавляет анимацию с ключом strokeEnd к слою рисования линии
+    func test_animateLine_addAnimationWithKeyStrokeEnd_toLineLayer() {
+        let mockLineLayer = MockLineLayer()
+        sut.lineLayer = mockLineLayer
+        
+        sut.animateLine()
+        
+        XCTAssertTrue(mockLineLayer.gotAnimation)
+        XCTAssertEqual(mockLineLayer.gotAnimationForKey, "strokeEnd")
+    }
+    
+    // TODO test timer
+    // запуск анимации после инициализации
+    func test_animateLine_afterInit() {
+        let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        let sut = MockWinnerLineView(frame: frame, winnerLine: .Horizon(0))
+        
+        XCTAssertTrue(sut.gotCalledAnimateLine)
+    }
 }
 
 extension WinnerLineViewTests {
@@ -172,5 +285,58 @@ extension WinnerLineViewTests {
         
         XCTAssertEqual(sut.startPoint, startPoint, "Line: \(line)")
         XCTAssertEqual(sut.endPoint, endPoint, "Line: \(line)")
+    }
+}
+
+// MARK: - Mock
+extension WinnerLineViewTests {
+    class MockWinnerLineView: WinnerLineView {
+        var gotCalledSetupLineLayer = false
+        var gotCalledAnimateLine = false
+        
+        override func setupLineLayer() {
+            gotCalledSetupLineLayer = true
+            super.setupLineLayer()
+        }
+        
+        override func animateLine() {
+            gotCalledAnimateLine = true
+            super.animateLine()
+        }
+    }
+    
+    class MockLinePath: UIBezierPath {
+        var gotStartPoint: CGPoint!
+        var gotEndPoint: CGPoint!
+        
+        override func move(to point: CGPoint) {
+            gotStartPoint = point
+            super.move(to: point)
+        }
+        
+        override func addLine(to point: CGPoint) {
+            gotEndPoint = point
+            super.addLine(to: point)
+        }
+    }
+    
+    class MockLineLayer: CAShapeLayer {
+        var gotCGPath: CGPath!
+        var gotAnimation = false
+        var gotAnimationForKey: String?
+        
+        override var path: CGPath? {
+            get {
+                return super.path
+            }
+            set {
+                self.gotCGPath = newValue
+            }
+        }
+        
+        override func add(_ anim: CAAnimation, forKey key: String?) {
+            gotAnimation = true
+            gotAnimationForKey = key
+        }
     }
 }
