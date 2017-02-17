@@ -43,7 +43,8 @@ class WinnerLineView: UIView {
         
         layer.addSublayer(lineLayer)
         
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (time) in
+        // TODO test
+        Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (time) in
             DispatchQueue.main.async {
                 self.animateLine()
             }

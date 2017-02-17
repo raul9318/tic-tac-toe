@@ -189,6 +189,12 @@ class GameEngine: NSObject {
     }
     
     func saveCurrentGame() {
+        // TODO test
+        guard !gameover else {
+            removeCurrentGame()
+            return
+        }
+        
         let nsCurrentGame = [plistDict]
         
         guard countOfMoves > 0 else {
