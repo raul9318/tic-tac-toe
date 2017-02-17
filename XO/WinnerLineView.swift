@@ -16,7 +16,10 @@ class WinnerLineView: UIView {
     let gameFieldGrid = 3
  
     var winnerLine: WinnerLine!
+    var linePath: UIBezierPath!
     var lineLayer: CAShapeLayer!
+    var lineLayerAnimation: CABasicAnimation!
+    
     lazy var startPoint: CGPoint! = {
         return self.calculateStartPoint()
     }()
@@ -36,10 +39,44 @@ class WinnerLineView: UIView {
         
         self.winnerLine = winnerLine
         
-        let linePath = UIBezierPath()
+        setupLineLayer()
         
-        lineLayer = CAShapeLayer()
+        layer.addSublayer(lineLayer)
+        
+        animateLine()
+    }
+    
+    func setupLineLayer() {
+        if linePath == nil {
+            linePath = UIBezierPath()
+        }
+        linePath.move(to: startPoint)
+        linePath.addLine(to: endPoint)
+        
+        if lineLayer == nil {
+            lineLayer = CAShapeLayer()
+        }
+        
         lineLayer.path = linePath.cgPath
+        lineLayer.lineWidth = lineWidth
+        lineLayer.fillColor = UIColor.clear.cgColor
+        lineLayer.strokeColor = lineColor.cgColor
+        lineLayer.strokeEnd = 0.0
+    }
+    
+    func animateLine() {
+        if lineLayerAnimation == nil {
+            lineLayerAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        }
+        
+        lineLayerAnimation.fromValue = 0
+        lineLayerAnimation.toValue = 1
+        lineLayerAnimation.duration = animationDuration
+        lineLayerAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        
+        lineLayer.strokeEnd = 1.0
+        
+        lineLayer.add(lineLayerAnimation, forKey: "strokeEnd")
     }
     
     required init?(coder aDecoder: NSCoder) {
