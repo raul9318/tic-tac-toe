@@ -43,7 +43,11 @@ class WinnerLineView: UIView {
         
         layer.addSublayer(lineLayer)
         
-        animateLine()
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (time) in
+            DispatchQueue.main.async {
+                self.animateLine()
+            }
+        }
     }
     
     func setupLineLayer() {

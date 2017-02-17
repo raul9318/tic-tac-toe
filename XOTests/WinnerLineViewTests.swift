@@ -264,6 +264,7 @@ class WinnerLineViewTests: XCTestCase {
         XCTAssertEqual(mockLineLayer.gotAnimationForKey, "strokeEnd")
     }
     
+    // TODO test timer
     // запуск анимации после инициализации
     func test_animateLine_afterInit() {
         let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
