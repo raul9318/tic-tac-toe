@@ -84,7 +84,7 @@ class GameEngineMoveTests: XCTestCase {
     func test_hasPlistDict() {
         let move = GameEngineMove(player: .X, x: 0, y: 0)!
         
-        let dict = move.plistDict
+        let dict = move.plistDict as Any
         
         XCTAssertNotNil(dict)
         XCTAssertTrue(dict is [String: Any])
