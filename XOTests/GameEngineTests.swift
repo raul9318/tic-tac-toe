@@ -265,7 +265,7 @@ class GameEngineTests: XCTestCase {
     
     // имеется свойство plistDict
     func test_hasPlistDict() {
-        let plistDict = sut.plistDict
+        let plistDict = sut.plistDict as Any
         
         XCTAssertNotNil(plistDict)
         XCTAssertTrue(plistDict is [String: Any])
