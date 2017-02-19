@@ -27,6 +27,7 @@ class OMarkView: UIView {
     }()
     
     let lineWidth: CGFloat = 5
+    let lineColor: UIColor = UIColor.white
     
     let durationOfAnimation: TimeInterval = 0.3
     
@@ -44,7 +45,7 @@ class OMarkView: UIView {
         circleLayer = CAShapeLayer()
         circleLayer.path = circlePath.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.strokeColor = UIColor.black.cgColor
+        circleLayer.strokeColor = lineColor.cgColor
         circleLayer.lineWidth = lineWidth
         
         // чтобы при инициализации не произошло рисование - указываем параметр strokeEnd = 0.0

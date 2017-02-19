@@ -17,6 +17,7 @@ class XMarkView: UIView {
     }
     
     let lineWidth: CGFloat = 5
+    let lineColor: UIColor = UIColor.init(red: 90, green: 90, blue: 90, alpha: 1.0)
     let marginPercentFromFrame: CGFloat = 20
     
     lazy var marginFromFrame: CGFloat = {
@@ -58,7 +59,7 @@ class XMarkView: UIView {
         firstLineLayer = CAShapeLayer()
         firstLineLayer.path = firstLinePath.cgPath
         firstLineLayer.fillColor = UIColor.clear.cgColor
-        firstLineLayer.strokeColor = UIColor.black.cgColor
+        firstLineLayer.strokeColor = lineColor.cgColor
         firstLineLayer.lineWidth = lineWidth
         
         firstLineLayer.strokeEnd = 0.0
@@ -72,7 +73,7 @@ class XMarkView: UIView {
         secondLineLayer = CAShapeLayer()
         secondLineLayer.path = secondLinePath.cgPath
         secondLineLayer.fillColor = UIColor.clear.cgColor
-        secondLineLayer.strokeColor = UIColor.black.cgColor
+        secondLineLayer.strokeColor = lineColor.cgColor
         secondLineLayer.lineWidth = lineWidth
         
         secondLineLayer.strokeEnd = 0.0

@@ -35,6 +35,11 @@ class XMarkViewTests: XCTestCase {
         XCTAssertEqual(sut.lineWidth, 5)
     }
     
+    // цвет линии
+    func test_lineColor() {
+        XCTAssertEqual(sut.lineColor, UIColor.init(red: 90, green: 90, blue: 90, alpha: 1.0))
+    }
+    
     // процентный отступ от границ ячейки
     func test_marginPercentFromFrame() {
         XCTAssertEqual(sut.marginPercentFromFrame, 20)
