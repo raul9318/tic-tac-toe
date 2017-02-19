@@ -37,7 +37,7 @@ class XMarkViewTests: XCTestCase {
     
     // цвет линии
     func test_lineColor() {
-        XCTAssertEqual(sut.lineColor, UIColor(red: 90 / 255.0, green: 90 / 255.0, blue: 90 / 255.0, alpha: 1))
+        XCTAssertEqual(sut.lineColor, ColorsOfApplication.xMarkColor)
     }
     
     // процентный отступ от границ ячейки

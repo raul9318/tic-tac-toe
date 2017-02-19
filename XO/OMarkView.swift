@@ -27,7 +27,7 @@ class OMarkView: UIView {
     }()
     
     let lineWidth: CGFloat = 5
-    let lineColor: UIColor = UIColor.white
+    let lineColor: UIColor = ColorsOfApplication.oMarkColor
     
     let durationOfAnimation: TimeInterval = 0.3
     

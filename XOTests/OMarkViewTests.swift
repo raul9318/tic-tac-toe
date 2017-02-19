@@ -50,7 +50,7 @@ class OMarkViewTests: XCTestCase {
     
     // цвет линии 
     func test_lineColor() {
-        XCTAssertEqual(sut.lineColor, UIColor.white)
+        XCTAssertEqual(sut.lineColor, ColorsOfApplication.oMarkColor)
     }
     
     

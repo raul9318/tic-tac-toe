@@ -17,7 +17,7 @@ class XMarkView: UIView {
     }
     
     let lineWidth: CGFloat = 5
-    let lineColor: UIColor = UIColor(red: 90 / 255.0, green: 90 / 255.0, blue: 90 / 255.0, alpha: 1)
+    let lineColor: UIColor = ColorsOfApplication.xMarkColor
     let marginPercentFromFrame: CGFloat = 20
     
     lazy var marginFromFrame: CGFloat = {
