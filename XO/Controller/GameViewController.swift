@@ -101,12 +101,12 @@ class GameViewController: UIViewController {
     }
     
     func drawWinnerLine() {
-        guard let winnerLine = gameEngine.winnerLine else {
+        guard gameEngine.winnerLine != nil else {
             return
         }
         
         let frame = gameFieldCollectionView.frame
-        winnerLineView = WinnerLineView(frame: frame, winnerLine: winnerLine)
+        winnerLineView = WinnerLineView(frame: frame, gameEngine: gameEngine)
         
         view.addSubview(winnerLineView)
     }
