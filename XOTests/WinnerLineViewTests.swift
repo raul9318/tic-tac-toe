@@ -317,7 +317,7 @@ extension WinnerLineViewTests {
 extension WinnerLineViewTests {
     class FakeGameEngine: GameEngine {
         class func fakeGameEngine(winnerLine: WinnerLine?, winner: Player?) -> FakeGameEngine {
-            var f = FakeGameEngine()
+            let f = FakeGameEngine()
             f.winner = winner
             f.winnerLine = winnerLine
             return f
