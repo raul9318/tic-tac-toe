@@ -14,9 +14,10 @@ class WinnerLineViewTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: WinnerLine.Horizon(0), winner: Player.X)
         
         let frame = CGRect(x: 0, y: 0, width: 320, height: 320)
-        sut = WinnerLineView(frame: frame, winnerLine: .Horizon(0))
+        sut = WinnerLineView(frame: frame, gameEngine: fakeGameEngine)
     }
     
     override func tearDown() {
@@ -39,10 +40,6 @@ class WinnerLineViewTests: XCTestCase {
         XCTAssertEqual(sut.lineWidth, 8)
     }
     
-    // цвет линии черный
-    func test_initially_lineColor_isBlack() {
-        XCTAssertEqual(sut.lineColor, UIColor.black)
-    }
     
     // длительность анимации 0.3
     func test_initially_animationDuration_equal_0dot3() {
@@ -153,8 +150,10 @@ class WinnerLineViewTests: XCTestCase {
     // устанавливается начальная и конечная точка
     func test_setupLineLayer() {
         let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: WinnerLine.Horizon(0), winner: Player.X)
         
-        let sut = WinnerLineView(frame: frame, winnerLine: .Horizon(0))
+        let sut = WinnerLineView(frame: frame, gameEngine: fakeGameEngine)
+        
         let mockLinePath = MockLinePath()
         sut.linePath = mockLinePath
         
@@ -213,7 +212,9 @@ class WinnerLineViewTests: XCTestCase {
     // после инициализации вызывается настройка слоя рисования линии
     func test_init_calledSetupLineLayer() {
         let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        let sut = MockWinnerLineView(frame: frame, winnerLine: .Horizon(0))
+        let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: WinnerLine.Horizon(0), winner: Player.X)
+        
+        let sut = MockWinnerLineView(frame: frame, gameEngine: fakeGameEngine)
         
         XCTAssertTrue(sut.gotCalledSetupLineLayer)
     }
@@ -268,9 +269,31 @@ class WinnerLineViewTests: XCTestCase {
     // запуск анимации после инициализации
     func _test_animateLine_afterInit() {
         let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        let sut = MockWinnerLineView(frame: frame, winnerLine: .Horizon(0))
+        let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: WinnerLine.Vertical(0), winner: Player.X)
+        
+        let sut = MockWinnerLineView(frame: frame, gameEngine: fakeGameEngine)
         
         XCTAssertTrue(sut.gotCalledAnimateLine)
+    }
+    
+    // цвет линии если победили крестики
+    func test_lineColor_whenWinnerPlayerX() {
+        let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: WinnerLine.Vertical(0), winner: Player.X)
+        
+        let sut = WinnerLineView(frame: frame, gameEngine: fakeGameEngine)
+        
+        XCTAssertEqual(sut.lineColor, ColorsOfApplication.xMarkColor)
+    }
+    
+    // цвет линии если победили нолики
+    func test_lineColor_whenWinnerPlayerO() {
+        let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: WinnerLine.Vertical(0), winner: Player.O)
+        
+        let sut = WinnerLineView(frame: frame, gameEngine: fakeGameEngine)
+        
+        XCTAssertEqual(sut.lineColor, ColorsOfApplication.oMarkColor)
     }
 }
 
@@ -278,13 +301,27 @@ extension WinnerLineViewTests {
     fileprivate func testing_returnStartAndEndPointOfLine_whenWinnerLineIs(frameWidth: CGFloat, winnerLine: WinnerLine, startPoint: CGPoint, endPoint: CGPoint, line: UInt = #line) {
         
         let frame = CGRect(x: 0, y: 0, width: frameWidth, height: frameWidth)
-        let sut = WinnerLineView(frame: frame, winnerLine: winnerLine)
+        let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: winnerLine, winner: Player.X)
+        
+        let sut = WinnerLineView(frame: frame, gameEngine: fakeGameEngine)
         
         XCTAssertNotNil(sut.startPoint, "Line: \(line)")
         XCTAssertNotNil(sut.endPoint, "Line: \(line)")
         
         XCTAssertEqual(sut.startPoint, startPoint, "Line: \(line)")
         XCTAssertEqual(sut.endPoint, endPoint, "Line: \(line)")
+    }
+}
+
+// MARK: - Fake
+extension WinnerLineViewTests {
+    class FakeGameEngine: GameEngine {
+        class func fakeGameEngine(winnerLine: WinnerLine?, winner: Player?) -> FakeGameEngine {
+            var f = FakeGameEngine()
+            f.winner = winner
+            f.winnerLine = winnerLine
+            return f
+        }
     }
 }
 

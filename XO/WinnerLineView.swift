@@ -11,7 +11,7 @@ import UIKit
 class WinnerLineView: UIView {
     let padding: CGFloat = 10
     let lineWidth: CGFloat = 8
-    let lineColor = UIColor.black
+    var lineColor = UIColor.black
     let animationDuration: TimeInterval = 0.3
     let gameFieldGrid = 3
  
@@ -32,12 +32,21 @@ class WinnerLineView: UIView {
         tag = 111
     }
     
-    convenience init(frame: CGRect, winnerLine: WinnerLine) {
+    convenience init(frame: CGRect, gameEngine: GameEngine) {
         self.init(frame: frame)
+        
+        if let winner = gameEngine.winner {
+            switch winner {
+            case .X:
+                lineColor = ColorsOfApplication.xMarkColor
+            case .O:
+                lineColor = ColorsOfApplication.oMarkColor
+            }
+        }
         
         backgroundColor = UIColor.clear
         
-        self.winnerLine = winnerLine
+        self.winnerLine = gameEngine.winnerLine
         
         setupLineLayer()
         

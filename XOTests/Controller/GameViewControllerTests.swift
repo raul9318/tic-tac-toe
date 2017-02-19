@@ -426,6 +426,7 @@ class GameViewControllerTests: XCTestCase {
 // MARK: - Fake
 extension GameViewControllerTests {
     class FakeWinnersGameEngine: GameEngine {
+        
         override var moves: [GameEngineMove] {
             get {
                 return [
