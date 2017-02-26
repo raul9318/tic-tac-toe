@@ -17,7 +17,7 @@ class XMarkViewTests: XCTestCase {
         super.setUp()
         
         fakeCellBounds = CGRect(x: 0, y: 0, width: 100, height: 100)
-        sut = XMarkView.xMarkView(withFrame: fakeCellBounds)
+        sut = XMarkView(frame: fakeCellBounds)
     }
     
     override func tearDown() {
@@ -30,7 +30,7 @@ class XMarkViewTests: XCTestCase {
         XCTAssertEqual(sut.frame, fakeCellBounds)
     }
     
-    // TODO толщина линии
+    // толщина линии
     func test_lineWidth_equal3() {
         XCTAssertEqual(sut.lineWidth, 5)
     }

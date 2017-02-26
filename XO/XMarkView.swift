@@ -10,12 +10,6 @@ import UIKit
 
 @IBDesignable
 class XMarkView: UIView {
-    class func xMarkView(withFrame frame: CGRect) -> XMarkView{
-        let xMarkView = XMarkView(frame: frame)
-        
-        return xMarkView
-    }
-    
     let lineWidth: CGFloat = 5
     let lineColor: UIColor = ColorsOfApplication.xMarkColor
     let marginPercentFromFrame: CGFloat = 20
@@ -81,28 +75,33 @@ class XMarkView: UIView {
         layer.addSublayer(secondLineLayer)
         
         animateLine(line: .First)
-        
-        _ = Timer.scheduledTimer(withTimeInterval: allAnimationDuration / 2, repeats: false, block: { (timer) in
-            self.animateLine(line: .Second)
-        })
+        animateLine(line: .Second)
     }
     
     func animateLine(line: Line) {
-        
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        
-        animation.duration = allAnimationDuration / 2
-        
-        animation.fromValue = 0
-        animation.toValue = 1
-        
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        
-        switch line {
-        case .First:
+
+        if line == Line.First {
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
+            
+            animation.duration = allAnimationDuration / 2
+            
+            animation.fromValue = 0
+            animation.toValue = 1
+            
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            
             firstLineLayer.strokeEnd = 1.0
             firstLineLayer.add(animation, forKey: "animateLine")
-        case .Second:
+        }
+
+        if line == Line.Second {
+            let animation = CAKeyframeAnimation(keyPath: "strokeEnd")
+            animation.duration = allAnimationDuration
+            
+            animation.keyTimes = [0, 0.5, 1]
+            animation.values = [
+                0, 0, 1.0
+            ]
             secondLineLayer.strokeEnd = 1.0
             secondLineLayer.add(animation, forKey: "animateLine")
         }
