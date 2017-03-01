@@ -13,12 +13,13 @@ class WinnerLineView: UIView {
     let lineWidth: CGFloat = 8
     var lineColor = UIColor.black
     let animationDuration: TimeInterval = 0.3
+    let animationDelay: TimeInterval = 0.6
     let gameFieldGrid = 3
  
     var winnerLine: WinnerLine!
     var linePath: UIBezierPath!
     var lineLayer: CAShapeLayer!
-    var lineLayerAnimation: CABasicAnimation!
+    lazy var lineLayerAnimation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "strokeEnd")
     
     lazy var startPoint: CGPoint! = {
         return self.calculateStartPoint()
@@ -53,9 +54,10 @@ class WinnerLineView: UIView {
         layer.addSublayer(lineLayer)
         
         // TODO test
+        self.animateLine()
         Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) { (time) in
             DispatchQueue.main.async {
-                self.animateLine()
+                
             }
         }
     }
@@ -79,18 +81,17 @@ class WinnerLineView: UIView {
     }
     
     func animateLine() {
-        if lineLayerAnimation == nil {
-            lineLayerAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        }
+        let allAnimationDuration = animationDelay + animationDuration
         
-        lineLayerAnimation.fromValue = 0
-        lineLayerAnimation.toValue = 1
-        lineLayerAnimation.duration = animationDuration
+        lineLayerAnimation.keyTimes = [0, NSNumber(value: animationDelay / allAnimationDuration), 1]
+        lineLayerAnimation.values = [0.0, 0.0, 1.0]
+        
+        lineLayerAnimation.duration = allAnimationDuration
         lineLayerAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         
-        lineLayer.strokeEnd = 1.0
-        
         lineLayer.add(lineLayerAnimation, forKey: "strokeEnd")
+        
+        lineLayer.strokeEnd = 1.0
     }
     
     required init?(coder aDecoder: NSCoder) {

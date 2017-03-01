@@ -240,11 +240,10 @@ class WinnerLineViewTests: XCTestCase {
         
         let animation = sut.lineLayerAnimation
         
-        XCTAssertEqual(animation?.keyPath, "strokeEnd")
-        XCTAssertEqual(animation?.fromValue as? Int, 0)
-        XCTAssertEqual(animation?.toValue as? Int, 1)
-        XCTAssertEqual(animation?.duration, sut.animationDuration)
-        XCTAssertEqual(animation?.timingFunction, CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
+        XCTAssertEqual(animation.keyPath, "strokeEnd")
+        XCTAssertEqual(animation.keyTimes!, [0, NSNumber(value: sut.animationDelay / (sut.animationDelay + sut.animationDuration)) ,1])
+        XCTAssertEqual(animation.values as! [Double], [0.0, 0.0, 1])
+        XCTAssertEqual(animation.timingFunction, CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
     }
     
     // запуск анимации изменяет параметр strokeEnd у слоя линии
@@ -265,9 +264,8 @@ class WinnerLineViewTests: XCTestCase {
         XCTAssertEqual(mockLineLayer.gotAnimationForKey, "strokeEnd")
     }
     
-    // TODO test timer
     // запуск анимации после инициализации
-    func _test_animateLine_afterInit() {
+    func test_animateLine_afterInit() {
         let frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         let fakeGameEngine = FakeGameEngine.fakeGameEngine(winnerLine: WinnerLine.Vertical(0), winner: Player.X)
         
