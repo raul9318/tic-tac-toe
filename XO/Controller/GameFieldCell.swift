@@ -23,10 +23,8 @@ class GameFieldCell: UICollectionViewCell {
         switch player {
         case .X:
             addSubview(XMarkView(frame: bounds))
-            break
         case .O:
             addSubview(OMarkView(frame: bounds))
-            break
         }
     }
 }
